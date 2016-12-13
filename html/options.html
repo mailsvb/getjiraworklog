@@ -1,0 +1,34 @@
+<html>
+  <head>
+    <title>JIRA get worklogs</title>
+    <meta HTTP-EQUIV="Content-type" CONTENT="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="/css/jquery-ui.min.css" type="text/css" media="all">
+    <link rel="stylesheet" href="/css/options.css" type="text/css" media="all">
+    <script type="text/javascript" src="/js/libs/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/libs/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="/js/options.js"></script>
+  </head>
+  <body>
+    <div class='main'>
+      <div class='header'>
+        JIRA get worklogs
+      </div>
+      <div class='content'>
+        <form id="from">
+          <span id="userid"></span>
+          <p>
+            <div class="left">
+              <nobr>
+                <input name="startdate" id="startdate" class="text" placeholder="start date"/>
+                <input name="enddate" id="enddate" class="text" placeholder="end date"/>
+                <button type="button" id="submit" onclick="submitButton();">Submit</button>
+              </nobr>
+            </div>
+          </p>
+        </form>
+      </div>
+      <p id="response">
+      </p>
+    </div>
+  </body>
+</html>
