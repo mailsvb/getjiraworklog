@@ -1,7 +1,7 @@
 $(function() {
     var user="";
-    var startdate = "";
-    var enddate = "";
+    var startdate = 0;
+    var enddate = 0;
     var totaltime = 0;
     var issueshandled = 0;
     $("#submit").attr("disabled","disabled");
@@ -36,8 +36,10 @@ $(function() {
             console.log(data);
             if (data.issues.length > 0) {
                 $( "#response" ).html( "Analyzing " + data.issues.length + " JIRA issue(s)<br>" );
-                startdate = new Date($("#startdate").val());
-                enddate = new Date($("#enddate").val());
+                startdate = new Date(new Date($("#startdate").val()).toUTCString()).getTime();
+                enddate = new Date(new Date(new Date($("#enddate").val()).getTime() + 86399000).toUTCString()).getTime();
+                console.log("Startdate: " + startdate);
+                console.log("Enddate: " + enddate);
                 for (var i=0; i < data.issues.length; i++) {
                     if (data.issues[i].fields.parent) {
                         getWorklog(data.issues[i].key, data.issues[i].fields.parent.key, data.issues.length);
@@ -69,12 +71,13 @@ $(function() {
         var Alltime = 0;
         for (var i=0; i < data.worklogs.length; i++) {
             if (data.worklogs[i].author.name == user) {
-                var worklogdate = new Date(data.worklogs[i].started);
+                var worklogdate = new Date(new Date(data.worklogs[i].started).toUTCString()).getTime();
+                console.log("Worklogdate: " + worklogdate);
                 Alltime += data.worklogs[i].timeSpentSeconds;
                 if (worklogdate >= startdate && worklogdate <= enddate)
                 {
                     totaltime += data.worklogs[i].timeSpentSeconds;
-                    time += data.worklogs[i].timeSpentSeconds;  
+                    time += data.worklogs[i].timeSpentSeconds;
                 }
             }
         }
